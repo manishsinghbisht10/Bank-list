@@ -104,3 +104,7 @@ nav.addEventListener('mouseout', function (e) {
     });
   }
 });
+
+window.addEventListener('scroll', function (e) {
+  console.log(e);
+});
