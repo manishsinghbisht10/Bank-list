@@ -13,6 +13,7 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
+const header = document.querySelector('.header');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -105,6 +106,20 @@ nav.addEventListener('mouseout', function (e) {
   }
 });
 
-window.addEventListener('scroll', function (e) {
-  console.log(e);
-});
+const stickyCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+    if (!entry.isIntersecting) nav.classList.add('sticky');
+    else nav.classList.remove('sticky');
+  });
+};
+
+const navHeight = nav.getBoundingClientRect().height;
+const stickyOption = {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+};
+
+const headerObserver = new IntersectionObserver(stickyCallback, stickyOption);
+headerObserver.observe(header);
